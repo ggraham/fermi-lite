@@ -1,5 +1,5 @@
 CC=			gcc
-CFLAGS=		-g -Wall -O2 -Wno-unused-function #-fno-inline-functions -fno-inline-functions-called-once
+CFLAGS=		-g -fPIC -Wall -O3 -Wno-unused-function #-fno-inline-functions -fno-inline-functions-called-once
 CPPFLAGS=
 INCLUDES=	
 OBJS=		kthread.o misc.o \
@@ -14,13 +14,16 @@ LIBS=		-lm -lz -lpthread
 .c.o:
 		$(CC) -c $(CFLAGS) $(CPPFLAGS) $(INCLUDES) $< -o $@
 
-all:$(PROG)
+all:$(PROG) libfml.a libfml.so
 
 fml-asm:libfml.a example.o
 		$(CC) $(CFLAGS) $^ -o $@ -L. -lfml $(LIBS)
 
 libfml.a:$(OBJS)
 		$(AR) -csru $@ $(OBJS)
+
+libfml.so:$(OBJS)
+		$(CC) $(CFLAGS) -shared -o $@ $^ $(LIBS)
 
 clean:
 		rm -fr gmon.out *.o ext/*.o a.out $(PROG) *~ *.a *.dSYM session*

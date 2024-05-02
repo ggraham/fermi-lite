@@ -72,23 +72,23 @@ struct rld_t *fml_fmi_gen(int n, bseq1_t *seq, int is_mt)
 	rld_t *e = 0;
 	int k;
 
-	for (k = 0; k < n; ++k)
-		if (seq[k].l_seq > 0)
-			break;
-	if (k == n) return 0;
+	//for (k = 0; k < n; ++k)
+	//	if (seq[k].l_seq > 0)
+	//		break;
+	//if (k == n) return 0;
 
 	mr = mr_init(ROPE_DEF_MAX_NODES, ROPE_DEF_BLOCK_LEN, MR_SO_RCLO);
 	for (k = 0; k < n; ++k) {
 		int i;
 		bseq1_t *s = &seq[k];
 		if (s->l_seq == 0) continue;
-		free(s->qual);
+		//free(s->qual);
 		for (i = 0; i < s->l_seq; ++i)
 			s->seq[i] = seq_nt6_table[(int)s->seq[i]];
 		for (i = 0; i < s->l_seq; ++i)
 			if (s->seq[i] == 5) break;
 		if (i < s->l_seq) {
-			free(s->seq);
+			//free(s->seq);
 			continue;
 		}
 		if (is_rev_same(s->l_seq, s->seq))
@@ -97,9 +97,9 @@ struct rld_t *fml_fmi_gen(int n, bseq1_t *seq, int is_mt)
 		kputsn(s->seq, s->l_seq + 1, &str);
 		seq_revcomp6(s->l_seq, (uint8_t*)s->seq);
 		kputsn(s->seq, s->l_seq + 1, &str);
-		free(s->seq);
+		//free(s->seq);
 	}
-	free(seq);
+	//free(seq);
 	mr_insert_multi(mr, str.l, (uint8_t*)str.s, is_mt);
 	free(str.s);
 

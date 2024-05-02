@@ -80,7 +80,7 @@ void rld_destroy(rld_t *e)
 	if (e == 0) return;
 	if (e->mem) {
 		close(e->fd);
-		munmap(e->mem, rld_file_size(e));
+		//munmap(e->mem, rld_file_size(e));
 	} else {
 		for (i = 0; i < e->n; ++i) free(e->z[i]);
 		free(e->frame);

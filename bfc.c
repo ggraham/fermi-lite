@@ -618,8 +618,8 @@ static void worker_ec(void *_data, long k, int tid)
 				s->qual[s->l_seq] = 0;
 			}
 		} else {
-			free(s->seq); free(s->qual);
-			s->l_seq = 0, s->seq = s->qual = 0;
+			//free(s->seq); free(s->qual);
+			//s->l_seq = 0, s->seq = s->qual = 0;
 		}
 	} else bfc_ec1(es->e[tid], s->seq, s->qual);
 }
