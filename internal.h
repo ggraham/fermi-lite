@@ -3,7 +3,7 @@
 
 #include "fml.h"
 
-extern unsigned char seq_nt6_table[256];
+extern unsigned char fml_seq_nt6_table[256];
 
 #ifdef __cplusplus
 extern "C" {

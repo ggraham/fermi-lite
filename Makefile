@@ -26,7 +26,7 @@ libfml.so:$(OBJS)
 		$(CC) $(CFLAGS) -shared -o $@ $^ $(LIBS)
 
 clean:
-		rm -fr gmon.out *.o ext/*.o a.out $(PROG) *~ *.a *.dSYM session*
+		rm -fr gmon.out *.o ext/*.o a.out $(PROG) *~ *.a *.so *.dSYM session*
 
 depend:
 		(LC_ALL=C; export LC_ALL; makedepend -Y -- $(CFLAGS) $(DFLAGS) -- *.c)

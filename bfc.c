@@ -102,7 +102,7 @@ static void worker_count(void *_data, long k, int tid)
 	bfc_kmer_t x = bfc_kmer_null;
 	uint64_t qmer = 0, mask = (1ULL<<cs->k) - 1;
 	for (i = l = 0; i < s->l_seq; ++i) {
-		int c = seq_nt6_table[(uint8_t)s->seq[i]] - 1;
+		int c = fml_seq_nt6_table[(uint8_t)s->seq[i]] - 1;
 		if (c < 4) {
 			bfc_kmer_append(cs->k, x.x, c);
 			qmer = (qmer<<1 | (s->qual == 0 || s->qual[i] - 33 >= cs->q)) & mask;
@@ -163,7 +163,7 @@ static int bfc_seq_conv(const char *s, const char *q, int qthres, ecseq_t *seq)
 	seq->n = l;
 	for (i = 0; i < l; ++i) {
 		ecbase_t *c = &seq->a[i];
-		c->b = c->ob = seq_nt6_table[(int)s[i]] - 1;
+		c->b = c->ob = fml_seq_nt6_table[(int)s[i]] - 1;
 		c->q = c->oq = !q? 1 : q[i] - 33 >= qthres? 1 : 0;
 		if (c->b > 3) c->q = c->oq = 0;
 		c->i = i;
@@ -586,7 +586,7 @@ static uint64_t max_streak(int k, const bfc_ch_t *ch, const bseq1_t *s)
 	uint64_t max = 0, t = 0;
 	bfc_kmer_t x = bfc_kmer_null;
 	for (i = l = 0; i < s->l_seq; ++i) {
-		int c = seq_nt6_table[(uint8_t)s->seq[i]] - 1;
+		int c = fml_seq_nt6_table[(uint8_t)s->seq[i]] - 1;
 		if (c < 4) { // not an ambiguous base
 			bfc_kmer_append(k, x.x, c);
 			if (++l >= k) { // ok, we have a k-mer now

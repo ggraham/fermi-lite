@@ -9,7 +9,7 @@
 #include "fml.h"
 #include "htab.h"
 
-unsigned char seq_nt6_table[256] = {
+unsigned char fml_seq_nt6_table[256] = {
     5, 5, 5, 5,  5, 5, 5, 5,  5, 5, 5, 5,  5, 5, 5, 5,
     5, 5, 5, 5,  5, 5, 5, 5,  5, 5, 5, 5,  5, 5, 5, 5,
     5, 5, 5, 5,  5, 5, 5, 5,  5, 5, 5, 5,  5, 5, 5, 5,
@@ -84,7 +84,7 @@ struct rld_t *fml_fmi_gen(int n, bseq1_t *seq, int is_mt)
 		if (s->l_seq == 0) continue;
 		//free(s->qual);
 		for (i = 0; i < s->l_seq; ++i)
-			s->seq[i] = seq_nt6_table[(int)s->seq[i]];
+			s->seq[i] = fml_seq_nt6_table[(int)s->seq[i]];
 		for (i = 0; i < s->l_seq; ++i)
 			if (s->seq[i] == 5) break;
 		if (i < s->l_seq) {
